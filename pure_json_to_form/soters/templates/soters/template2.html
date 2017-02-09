@@ -1,0 +1,25 @@
+<form id="empty-layer-uploader" method="post" enctype="multipart/form-data" action="../layer_create">
+    <div id="form_empty_layer">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+        {% if errormsgs %}
+        {% for value in errormsgs %}
+		</p>  {{ value }} </p>
+	    {% endfor %}
+		{% endif %}
+	    {% for error in form_empty_layer.non_field_errors %}
+		{{ error }} </br>
+	    {% endfor %}
+		</br>
+	    {% for field in form_empty_layer.visible_fields %}
+		{{ field }} </br>
+	    {% endfor %}
+    </div>
+    </br>
+    <button type="button" id="add-another">add another</button> </br> </br>
+    <button type="submit" id="empty-layer-button" name="emptylayerbtn">Upload</button>
+    </br></br>
+    // used in order to save the number of added fields (this number will pass to forms.py through the view)
+    <input type="text" name="total_input_fields"/>
+</form>
