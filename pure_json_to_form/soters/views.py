@@ -4,7 +4,7 @@ from django.views import generic
 from django.http import HttpResponse
 from .models import Dog
 from django.views.generic.base import View 
-from .forms import NameForm, MyForm
+from .forms import NameForm, MyForm, MyForm2
 #import dynaform
 
 def index(request):
@@ -36,15 +36,13 @@ def myview(request):
             form = MyForm()
     return render(request, "./soters/template.html", { 'form': form })
 
-def dform(request):
-    json_form = get_json_form_from_somewhere()
-    form_class = dynaform.get_form(json_form)
-    data = {}
-    if request.method == 'POST':
-        form = form_class(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-    else:
-        form = form_class()
+def myview2(request):
 
-    return render_to_response( "dform.html", {'form': form, 'data': data,}, RequestContext(request))
+    if request.method == 'POST':
+        form = MyForm2(request.POST, extra=request.POST.get('total_input_fields'))
+
+        if form.is_valid():
+            print "valid!"
+    else:
+        form = MyForm2()
+    return render(request, "./soters/template2.html", { 'form': form })
