@@ -1,0 +1,18 @@
+form_count = Number($("[name=extra_field_count]").val());
+// get extra form count so we know what index to use for the next item.
+$("#add-another").click(function() {
+    form_count ++;
+
+	element = $('<input type="text"/>');
+	element.attr('name', 'extra_field_' + form_count);
+	$("#forms").append(element);
+	$("[name=extra_field_count]").val(form_count);
+})
+
+<form>
+    <div id="forms">
+        {{ form.as_p }}
+    </div>
+    <button id="add-another">add another</button>
+    <input type="submit" />
+</form>
