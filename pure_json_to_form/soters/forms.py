@@ -22,8 +22,8 @@ class MyForm(forms.Form):
 
         for index in range(int(extra_fields)):
             # generate extra fields in the number specified via extra_fields
-            self.fields['extra_field_{index}'.format(index=index)] = forms.CharField()
-
+            if index % 2: self.fields['extra_field_{index}'.format(index=index)] = forms.CharField()
+            else: self.fields['extra_field_{index}'.format(index=index)] = forms.DecimalField()
 class MyForm2(forms.Form):
     empty_layer_name = forms.CharField(max_length=255,
                                        required=True, 
